@@ -1,0 +1,35 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block body %}
+    <h1>Reponse index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdReponse</th>
+                <th>MessageRep</th>
+                <th>Etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reponse in reponses %}
+            <tr>
+                <td>{{ reponse.idReponse }}</td>
+                <td>{{ reponse.messageRep }}</td>
+                <td>{{ reponse.etat }}</td>
+                <td>
+                    <a href="{{ path('app_reponse_show', {'idReponse': reponse.idReponse}) }}">show</a>
+                    <a href="{{ path('app_reponse_edit', {'idReponse': reponse.idReponse}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reponse_new') }}">Create new</a>
+{% endblock %}

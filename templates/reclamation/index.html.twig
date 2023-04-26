@@ -1,0 +1,34 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Liste des réclamations{% endblock %}
+
+{% block body %}
+    <h1>Liste des réclamations</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdRec</th>
+                <th>Objectif</th>
+                <th>Text</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.idRec }}</td>
+                <td>{{ reclamation.objectif }}</td>
+                <td>{{ reclamation.text }}</td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}
