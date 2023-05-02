@@ -1,0 +1,35 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Liste des commandes{% endblock %}
+
+{% block body %}
+   
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdCommande</th>
+                <th>NbrProduit</th>
+                <th>Total</th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+               <td>{{ commande.idCommande }}</td>
+                <td>{{ commande.nbrProduit }}</td>
+                <td>{{ commande.total }}</td>
+                <td>{{ commande.fkIdLivraison }}</td>
+                 
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

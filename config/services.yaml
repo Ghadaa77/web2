@@ -1,0 +1,19 @@
+parameters:
+    my_parameter: 'my value'
+    images_directory: '%kernel.project_dir%/public/images'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    knp_paginator.paginator:
+        class: Knp\Component\Pager\PaginatorInterface
+        arguments: ["@knp_paginator"]

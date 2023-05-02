@@ -1,0 +1,66 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %}
+<input type="text" class="form-control" id="searchInput" placeholder="Search&hellip;">
+
+<br>
+<script>
+        function filterTable() {
+            const filter = document.getElementById('searchInput').value.toUpperCase();
+            const rows = document.querySelectorAll('table tr');
+            for (let i = 1; i < rows.length; i++) {
+                const cols = rows[i].querySelectorAll('td');
+                let visible = false;
+                for (let j = 0; j < cols.length; j++) {
+                    const cell = cols[j];
+                    if (cell.innerText.toUpperCase().indexOf(filter) > -1) {
+                        visible = true;
+                        break;
+                    }
+                }
+                rows[i].style.display = visible ? '' : 'none';
+            }
+        }
+        document.getElementById('searchInput').addEventListener('keyup', filterTable);
+    </script>
+
+    <h1>Produit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdProduit</th>
+                <th>PrixProduit</th>
+                <th>TypePaiement</th>
+                <th>TypeProduit</th>
+                <th>DescriptionProduit</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.idProduit }}</td>
+                <td>{{ produit.prixProduit }}</td>
+                <td>{{ produit.typePaiement }}</td>
+                <td>{{ produit.typeProduit }}</td>
+                <td>{{ produit.descriptionProduit }}</td>
+                <td>{{ produit.image }}</td>
+                <td>
+                    <a href="{{ path('app_produit_front_show', {'idProduit': produit.idProduit}) }}">show</a>
+                    <a href="{{ path('app_produit_front_edit', {'idProduit': produit.idProduit}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_produit_front_new') }}">Create new</a>
+{% endblock %}
