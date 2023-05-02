@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/pointderelais/front')]
 class PointderelaisFrontController extends AbstractController
+<<<<<<< HEAD
 {  #[Route('/base', name: 'app_pointderelais_new')]
     public function front(): Response
     {
@@ -19,6 +20,9 @@ class PointderelaisFrontController extends AbstractController
             'controller_name' => 'PointderelaisFrontController',
         ]);
     }
+=======
+{
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
     #[Route('/', name: 'app_pointderelais_front_index', methods: ['GET'])]
     public function index(PointderelaisRepository $pointderelaisRepository): Response
     {

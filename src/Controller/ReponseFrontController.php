@@ -15,4 +15,8 @@ class ReponseFrontController extends AbstractController
             'controller_name' => 'ReponseFrontController',
         ]);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627

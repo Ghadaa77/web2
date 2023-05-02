@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+<<<<<<< HEAD
 use App\Entity\Reponse;
 use App\Form\ReponseType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -161,3 +162,19 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
     }
     
 }
+=======
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class ReponseController extends AbstractController
+{
+    #[Route('/reponse', name: 'app_reponse')]
+    public function index(): Response
+    {
+        return $this->render('reponse/index.html.twig', [
+            'controller_name' => 'ReponseController',
+        ]);
+    }
+}
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627

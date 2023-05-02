@@ -27,6 +27,10 @@ class Commande
      * @ORM\Column(name="date_commande", type="date", nullable=false)
      */
     private $dateCommande;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
     
      #[ORM\Column] 
      
