@@ -36,6 +36,7 @@ class ReclamationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+<<<<<<< HEAD
     public function searchByName( string $nom)
     {
         return $this->createQueryBuilder('p')
@@ -44,5 +45,7 @@ class ReclamationRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+=======
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
 
 }

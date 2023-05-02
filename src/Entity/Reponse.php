@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+<<<<<<< HEAD
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -51,6 +52,46 @@ class Reponse
     #[ORM\ManyToOne(inversedBy: 'reponses')]
     #[ORM\JoinColumn(name: "fk_id_reclamation", referencedColumnName: "id_rec")]
     private ?Reclamation $fkIdReclamation = null;
+=======
+
+#[ORM\Entity(repositoryClass: ReponseRepository::class)]
+class Reponse
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    
+    private ?int $idReponse = null;
+
+   #[ORM\Column( length:255)]
+    
+    private ?string $messageRep = null;
+
+
+      #[ORM\Column(length:255)]
+     
+    private ?string $etat = null;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fk_id_admin", referencedColumnName="id")
+     * })
+     */
+    private $fkIdAdmin;
+
+    /**
+     * @var \Reclamation
+     *
+     * @ORM\ManyToOne(targetEntity="Reclamation")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fk_id_reclamation", referencedColumnName="id_rec")
+     * })
+     */
+    private $fkIdReclamation;
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
 
     public function getIdReponse(): ?int
     {

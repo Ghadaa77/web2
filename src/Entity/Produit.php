@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+<<<<<<< HEAD
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -55,6 +56,39 @@ class Produit
    
     private ?string $image = null;
 
+=======
+
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: ProduitRepository::class)]
+class Produit
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    
+    private ?int $idProduit = null;
+
+
+      #[ORM\Column]
+     
+    private ?float $prixProduit = null;
+
+    
+     #[ORM\Column( length:255)]
+     
+    private ?string $typePaiement =null;
+
+   
+      #[ORM\Column(length:255)]
+     
+    private ?string $typeProduit = null;
+
+    
+      #[ORM\Column( length:255)]
+   
+    private ?string $descriptionProduit = null;
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
 
     public function getIdProduit(): ?int
     {
@@ -110,6 +144,7 @@ class Produit
     }
 
 
+<<<<<<< HEAD
     public function getImage(): ?string
     {
         return $this->image;
@@ -122,4 +157,6 @@ class Produit
         return $this;
     }
 
+=======
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
 }

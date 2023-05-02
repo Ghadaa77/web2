@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+<<<<<<< HEAD
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
@@ -60,12 +61,77 @@ class Livraison
     #[ORM\ManyToOne(inversedBy: 'livraisons')]
     #[ORM\JoinColumn(name:"fk_id_pointderelais", referencedColumnName: "id_pointderelais")]
     private ?Pointderelais $fkIdPointderelais = null;
+=======
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\LivraisonRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\User;
+use App\Entity\Pointderelais;
+use Doctrine\DBAL\Types\Types;
+
+
+
+#[ORM\Entity(repositoryClass: LivraisonRepository::class)]
+class Livraison
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idLivraison = null;
+
+
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"date est requis")]
+    private ?\DateTimeInterface $dateLivraison = null;
+
+
+    
+     #[ORM\Column]
+     #[Assert\Positive(message:"Le prix doit etre un nombre positive")]
+    private ?float $prixLivraison = null;
+
+    
+      #[ORM\Column( length :255 )]
+      #[Assert\NotBlank(message:"Le champ texte doit contenir au moins 10 caractères")]
+      private ?string $adresseLivraison = null;
+
+      #[ORM\Column( length :255 )]
+      #[Assert\NotBlank(message:"Le champ texte doit contenir au moins 5 caractères")]
+      private ?string $etatLivraison= null;
+
+      #[ORM\ManyToOne(inversedBy: 'livraisons')]
+      #[ORM\JoinColumn(name: "fk_id_livreur", referencedColumnName: "id")]
+
+      private ?User $fkIdLivreur = null;
+    
+
+      #[ORM\ManyToOne(inversedBy: 'livraisons')]
+      #[ORM\JoinColumn(name:"fk_id_pointderelais", referencedColumnName: "id_pointderelais")]
+      private ?Pointderelais $fkIdPointderelais = null;
+
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
 
     public function getIdLivraison(): ?int
     {
         return $this->idLivraison;
     }
 
+<<<<<<< HEAD
+=======
+    public function getDateLivraison(): ?\DateTimeInterface
+    {
+        return $this->dateLivraison;
+    }
+
+    public function setDateLivraison(\DateTimeInterface $dateLivraison): self
+    {
+        $this->dateLivraison = $dateLivraison;
+
+        return $this;
+    }
+
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
     public function getPrixLivraison(): ?float
     {
         return $this->prixLivraison;
@@ -90,6 +156,7 @@ class Livraison
         return $this;
     }
 
+<<<<<<< HEAD
     public function getDateLivraison(): ?\DateTimeInterface
     {
         return $this->dateLivraison;
@@ -101,6 +168,8 @@ class Livraison
 
         return $this;
     }
+=======
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
     public function getEtatLivraison(): ?string
     {
         return $this->etatLivraison;
@@ -118,12 +187,20 @@ class Livraison
         return $this->fkIdLivreur;
     }
 
+<<<<<<< HEAD
     public function setFkIdLivreur(User $fkIdLivreur): self
+=======
+    public function setFkIdLivreur(?User $fkIdLivreur): self
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
     {
         $this->fkIdLivreur = $fkIdLivreur;
 
         return $this;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
     public function getFkIdPointderelais(): ?Pointderelais
     {
         return $this->fkIdPointderelais;
@@ -136,4 +213,8 @@ class Livraison
         return $this;
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627

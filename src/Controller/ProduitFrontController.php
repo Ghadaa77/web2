@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+<<<<<<< HEAD
 use App\Entity\Produit;
 use App\Form\Produit1Type;
 use App\Form\ProduitType;
@@ -131,3 +132,19 @@ class ProduitFrontController extends AbstractController
         return $this->redirectToRoute('app_produit_front_index', [], Response::HTTP_SEE_OTHER);
     }
 }
+=======
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class ProduitFrontController extends AbstractController
+{
+    #[Route('/produit/front', name: 'app_produit_front')]
+    public function index(): Response
+    {
+        return $this->render('produit_front/index.html.twig', [
+            'controller_name' => 'ProduitFrontController',
+        ]);
+    }
+}
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627

@@ -14,8 +14,21 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Utils\AdresseFilter;
+<<<<<<< HEAD
 
 use GuzzleHttp\Client;
+=======
+use GuzzleHttp\Client;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Label\Font\NotoSans;
+use Endroid\QrCode\Writer\DataUriWriter;
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
 use App\Entity\PdfGeneratorService;
 
 
@@ -108,6 +121,7 @@ class LivraisonController extends AbstractController
 
 
     #[Route('/{idLivraison}', name: 'app_livraison_show', methods: ['GET'])]
+<<<<<<< HEAD
  
     public function show(Livraison $livraison, Request $request, PaginatorInterface $paginator): Response
     {
@@ -122,6 +136,46 @@ class LivraisonController extends AbstractController
             'livraison' => $livraison,
             // passer la pagination à la vue
             'pagination' => $pagination,
+=======
+    public function show(Livraison $livraison,Request $request, PaginatorInterface $paginator): Response
+    {
+        // Utiliser le Paginator pour paginer les résultats
+    $pagination = $paginator->paginate(
+        $livraison,
+        $request->query->getInt('page', 1),
+        10
+    );
+
+
+
+// Récupérer l'etat 
+$etatLivraison = $livraison->getEtatLivraison();
+
+
+
+// Appeler l'API de Google Translate pour traduire l'etat en anglais
+$client = new Client(); // Ajouter cette ligne
+$response = $client->post('https://translation.googleapis.com/language/translate/v2', [
+    'form_params' => [
+        'q' => [$etatLivraison],
+        'target' => 'en',
+        'format' => 'text',
+        'source' => 'fr',
+        'key' => 'AIzaSyBd0MRfVbQT80Ow7x4mTSlsv9NiaSryI2E', // Remplacer par votre clé d'API Google Translate
+    ],
+]);
+
+// Récupérer les traductions à partir de la réponse JSON
+$translations = json_decode((string) $response->getBody(), true)['data']['translations'];
+
+// Mettre à jour 
+$livraison->setEtatLivraison($translations[0]['translatedText']);
+
+
+
+        return $this->render('livraison/show.html.twig', [
+            'livraison' => $livraison,
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
         ]);
     }
 

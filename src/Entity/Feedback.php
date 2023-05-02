@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+<<<<<<< HEAD
 /**
  * Feedback
  *
@@ -20,6 +21,16 @@ class Feedback
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idFeedbackp;
+=======
+#[ORM\Entity(repositoryClass: FeedbackRepository::class)]
+class Feedback
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    
+    private ?int $idFeedbackp = null;
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
 
     /**
      * @var bool
@@ -36,9 +47,18 @@ class Feedback
     private $fkIdUserp;
 
     /**
+<<<<<<< HEAD
      * @var int
      *
      * @ORM\Column(name="fk_id_produit", type="integer", nullable=false)
+=======
+     * @var \Produit
+     *
+     * @ORM\ManyToOne(targetEntity="Produit")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fk_id_produit", referencedColumnName="id_produit")
+     * })
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
      */
     private $fkIdProduit;
 
@@ -71,12 +91,20 @@ class Feedback
         return $this;
     }
 
+<<<<<<< HEAD
     public function getFkIdProduit(): ?int
+=======
+    public function getFkIdProduit(): ?Produit
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
     {
         return $this->fkIdProduit;
     }
 
+<<<<<<< HEAD
     public function setFkIdProduit(int $fkIdProduit): self
+=======
+    public function setFkIdProduit(?Produit $fkIdProduit): self
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
     {
         $this->fkIdProduit = $fkIdProduit;
 

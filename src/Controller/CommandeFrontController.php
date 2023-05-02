@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+<<<<<<< HEAD
 use App\Entity\Commande;
 use App\Form\CommandeType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -81,4 +82,19 @@ class CommandeFrontController extends AbstractController
 
         return $this->redirectToRoute('app_commande_front_index', [], Response::HTTP_SEE_OTHER);
     }
+=======
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class CommandeFrontController extends AbstractController
+{
+    #[Route('/commande/front', name: 'app_commande_front')]
+    public function index(): Response
+    {
+        return $this->render('commande_front/index.html.twig', [
+            'controller_name' => 'CommandeFrontController',
+        ]);
+    }
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
 }

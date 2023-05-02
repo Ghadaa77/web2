@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+<<<<<<< HEAD
 /**
  * Categorie
  *
@@ -27,6 +28,19 @@ class Categorie
      * @ORM\Column(name="type_categorie", type="string", length=11, nullable=false)
      */
     private $typeCategorie;
+=======
+#[ORM\Entity(repositoryClass: CategorieRepository::class)]
+class Categorie
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    
+    private ?int $idCategorie = null;
+
+    #[ORM\Column(length : 11)]
+    private ?string $typeCategorie = null;
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
 
     public function getIdCategorie(): ?int
     {

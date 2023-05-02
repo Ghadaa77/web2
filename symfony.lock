@@ -38,6 +38,7 @@
             "./migrations/.gitignore"
         ]
     },
+<<<<<<< HEAD
     "knplabs/knp-paginator-bundle": {
         "version": "v5.9.0"
     },
@@ -53,6 +54,14 @@
     "mgilet/notification-bundle": {
         "version": "4.0"
     },
+=======
+    "endroid/qr-code-bundle": {
+        "version": "4.3.1"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.9.0"
+    },
+>>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {
