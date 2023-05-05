@@ -11,16 +11,6 @@
         "doctrine/doctrine-bundle": "^2.9",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
-<<<<<<< HEAD
-        "guzzlehttp/guzzle": "^7.5",
-        "knplabs/knp-paginator-bundle": "*",
-        "liip/imagine-bundle": "^2.10",
-        "mgilet/notification-bundle": "*",
-=======
-        "endroid/qr-code": "^4.8",
-        "endroid/qr-code-bundle": "^4.3",
-        "knplabs/knp-paginator-bundle": "^5.9",
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.16",
         "sensio/framework-extra-bundle": "^6.1",
@@ -41,7 +31,7 @@
         "symfony/process": "5.4.*",
         "symfony/property-access": "5.4.*",
         "symfony/property-info": "5.4.*",
-        "symfony/runtime": "^6.2",
+        "symfony/runtime": "5.4.*",
         "symfony/security-bundle": "5.4.*",
         "symfony/serializer": "5.4.*",
         "symfony/string": "5.4.*",
@@ -50,7 +40,6 @@
         "symfony/validator": "5.4.*",
         "symfony/web-link": "5.4.*",
         "symfony/yaml": "5.4.*",
-        "tecnickcom/tcpdf": "^6.6",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
@@ -59,12 +48,7 @@
             "composer/package-versions-deprecated": true,
             "php-http/discovery": true,
             "symfony/flex": true,
-<<<<<<< HEAD
             "symfony/runtime": true
-=======
-            "symfony/runtime": true,
-            "endroid/installer": true
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
         },
         "optimize-autoloader": true,
         "preferred-install": {
