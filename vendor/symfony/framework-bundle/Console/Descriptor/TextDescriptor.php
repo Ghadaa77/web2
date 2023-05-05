@@ -37,7 +37,7 @@ use Symfony\Component\Routing\RouteCollection;
  */
 class TextDescriptor extends Descriptor
 {
-    private $fileLinkFormatter;
+    private ?FileLinkFormatter $fileLinkFormatter;
 
     public function __construct(FileLinkFormatter $fileLinkFormatter = null)
     {
@@ -404,7 +404,7 @@ class TextDescriptor extends Descriptor
         $this->describeContainerDefinition($builder->getDefinition((string) $alias), array_merge($options, ['id' => (string) $alias]));
     }
 
-    protected function describeContainerParameter($parameter, array $options = [])
+    protected function describeContainerParameter(mixed $parameter, array $options = [])
     {
         $options['output']->table(
             ['Parameter', 'Value'],
@@ -508,7 +508,7 @@ class TextDescriptor extends Descriptor
         }
     }
 
-    protected function describeCallable($callable, array $options = [])
+    protected function describeCallable(mixed $callable, array $options = [])
     {
         $this->writeText($this->formatCallable($callable), $options);
     }
@@ -541,7 +541,7 @@ class TextDescriptor extends Descriptor
         return trim($configAsString);
     }
 
-    private function formatControllerLink($controller, string $anchorText, callable $getContainer = null): string
+    private function formatControllerLink(mixed $controller, string $anchorText, callable $getContainer = null): string
     {
         if (null === $this->fileLinkFormatter) {
             return $anchorText;
@@ -563,7 +563,7 @@ class TextDescriptor extends Descriptor
             } else {
                 $r = new \ReflectionFunction($controller);
             }
-        } catch (\ReflectionException $e) {
+        } catch (\ReflectionException) {
             if (\is_array($controller)) {
                 $controller = implode('::', $controller);
             }
@@ -582,7 +582,7 @@ class TextDescriptor extends Descriptor
 
             try {
                 $r = new \ReflectionMethod($container->findDefinition($id)->getClass(), $method);
-            } catch (\ReflectionException $e) {
+            } catch (\ReflectionException) {
                 return $anchorText;
             }
         }
@@ -595,7 +595,7 @@ class TextDescriptor extends Descriptor
         return $anchorText;
     }
 
-    private function formatCallable($callable): string
+    private function formatCallable(mixed $callable): string
     {
         if (\is_array($callable)) {
             if (\is_object($callable[0])) {

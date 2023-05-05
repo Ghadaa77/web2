@@ -1,0 +1,24 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Service Statistics{% endblock %}
+
+{% block body %}
+    <h1>Service Statistics</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Categorie</th>
+                <th>Service Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categorie in categories %}
+                <tr>
+                    <td>{{ categorie.typeCategorie }}</td>
+                    <td>{{ categorie.serviceCount }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

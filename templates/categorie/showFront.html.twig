@@ -1,0 +1,29 @@
+
+{% extends 'baseFront.html.twig' %}
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+    <h1>Categorie</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorie.id}}</td>
+            </tr>
+            <tr>
+                <th>TypeCategorie</th>
+                <td>{{ categorie.typeCategorie }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <div style="text-align: center;">
+     <form action="{{ path('app_categorie_editFront', {'id': categorie.id}) }}" method="get" style="display: inline; margin: 0 auto;">
+        <button type="submit" class="btn btn-link" style="padding: 0;"><i class="bi bi-pencil-square"></i></button>
+     </form>
+    </div>
+    {{ include('categorie/_delete_formFront.html.twig') }}
+    <a href="{{ path('app_categorie_indexFront') }}"style="display: block; margin: 0 auto; text-align: center;">back to list</a>
+{% endblock %}

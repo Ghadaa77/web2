@@ -18,7 +18,7 @@ class CacheConfig
      * @param ParamConfigurator|bool $value
      * @return $this
      */
-    public function annotations($value): self
+    public function annotations($value): static
     {
         $this->_usedProperties['annotations'] = true;
         $this->annotations = $value;

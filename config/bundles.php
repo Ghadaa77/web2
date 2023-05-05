@@ -12,11 +12,6 @@ return [
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
+    CMEN\GoogleChartsBundle\CMENGoogleChartsBundle::class => ['all' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
-<<<<<<< HEAD
-=======
-    Endroid\QrCodeBundle\EndroidQrCodeBundle::class => ['all' => true],
-
-    
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
 ];

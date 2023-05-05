@@ -3,12 +3,12 @@
 namespace Knp\Component\Pager\Event\Subscriber\Filtration\Doctrine\ORM\Query;
 
 use Doctrine\DBAL\Types\Types as Type;
-use Doctrine\ORM\Query\AST\Functions\LowerFunction;
 use Doctrine\ORM\Query\AST\ComparisonExpression;
 use Doctrine\ORM\Query\AST\ConditionalExpression;
 use Doctrine\ORM\Query\AST\ConditionalFactor;
 use Doctrine\ORM\Query\AST\ConditionalPrimary;
 use Doctrine\ORM\Query\AST\ConditionalTerm;
+use Doctrine\ORM\Query\AST\Functions\LowerFunction;
 use Doctrine\ORM\Query\AST\LikeExpression;
 use Doctrine\ORM\Query\AST\Literal;
 use Doctrine\ORM\Query\AST\Node;
@@ -16,6 +16,7 @@ use Doctrine\ORM\Query\AST\PathExpression;
 use Doctrine\ORM\Query\AST\SelectStatement;
 use Doctrine\ORM\Query\AST\WhereClause;
 use Doctrine\ORM\Query\TreeWalkerAdapter;
+use Knp\Component\Pager\Exception\InvalidValueException;
 
 /**
  * Where Query TreeWalker for Filtration functionality
@@ -34,18 +35,15 @@ class WhereWalker extends TreeWalkerAdapter
     public const HINT_PAGINATOR_FILTER_VALUE = 'knp_paginator.filter.value';
 
     /**
-     * Filter strings in a case insensitive way
+     * Filter strings in a case-insensitive way
      */
-    const HINT_PAGINATOR_FILTER_CASE_INSENSITIVE = 'knp_paginator.filter.case_insensitive';
+    public const HINT_PAGINATOR_FILTER_CASE_INSENSITIVE = 'knp_paginator.filter.case_insensitive';
 
     /**
      * Walks down a SelectStatement AST node, modifying it to
      * filter the query like requested by url
-     *
-     * @param  SelectStatement $AST
-     * @return void|string
      */
-    public function walkSelectStatement(SelectStatement $AST)
+    public function walkSelectStatement(SelectStatement $AST): void
     {
         $query = $this->_getQuery();
         $queriedValue = $query->getHint(self::HINT_PAGINATOR_FILTER_VALUE);
@@ -61,17 +59,17 @@ class WhereWalker extends TreeWalkerAdapter
             if (2 <= count($parts)) {
                 $alias = trim(reset($parts));
                 if (!array_key_exists($alias, $components)) {
-                    throw new \UnexpectedValueException("There is no component aliased by [{$alias}] in the given Query");
+                    throw new InvalidValueException("There is no component aliased by [{$alias}] in the given Query");
                 }
                 $meta = $components[$alias];
                 if (!$meta['metadata']->hasField($field)) {
-                    throw new \UnexpectedValueException("There is no such field [{$field}] in the given Query component, aliased by [$alias]");
+                    throw new InvalidValueException("There is no such field [{$field}] in the given Query component, aliased by [$alias]");
                 }
                 $pathExpression = new PathExpression(PathExpression::TYPE_STATE_FIELD, $alias, $field);
                 $pathExpression->type = PathExpression::TYPE_STATE_FIELD;
             } else {
                 if (!array_key_exists($field, $components)) {
-                    throw new \UnexpectedValueException("There is no component field [{$field}] in the given Query");
+                    throw new InvalidValueException("There is no component field [{$field}] in the given Query");
                 }
                 $pathExpression = $components[$field]['resultVariable'];
             }
@@ -96,7 +94,8 @@ class WhereWalker extends TreeWalkerAdapter
                             Type::BIGINT,
                             Type::FLOAT,
                             Type::DECIMAL,
-                        ]
+                        ],
+                        true
                     )
                 )
             ) {

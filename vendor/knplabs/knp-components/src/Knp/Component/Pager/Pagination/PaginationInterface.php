@@ -8,6 +8,11 @@ use ArrayAccess, Countable, Traversable;
  * Pagination interface strictly defines
  * the methods - paginator will use to populate the
  * pagination data
+ *
+ * @template TKey
+ * @template TValue
+ *
+ * @template-extends Traversable<TKey, TValue>
  */
 interface PaginationInterface extends Countable, Traversable, ArrayAccess
 {
@@ -32,10 +37,15 @@ interface PaginationInterface extends Countable, Traversable, ArrayAccess
      */
     public function getTotalItemCount(): int;
 
+    /**
+     * @param iterable<TKey, TValue> $items
+     */
     public function setItems(iterable $items): void;
 
     /**
      * Get current items
+     *
+     * @return iterable<TKey, TValue>
      */
     public function getItems(): iterable;
 
@@ -46,10 +56,8 @@ interface PaginationInterface extends Countable, Traversable, ArrayAccess
 
     /**
      * Get pagination alias
-     *
-     * @return mixed
      */
-    public function getPaginatorOption(string $name);
+    public function getPaginatorOption(string $name): mixed;
 
     /**
      * @param array $parameters
@@ -58,8 +66,6 @@ interface PaginationInterface extends Countable, Traversable, ArrayAccess
 
     /**
      * Return custom parameter
-     * 
-     * @return mixed
      */
-    public function getCustomParameter(string $name);
+    public function getCustomParameter(string $name): mixed;
 }

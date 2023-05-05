@@ -1,0 +1,11 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}New Feedback{% endblock %}
+
+{% block body %}
+    <h1>Create new Feedbackp</h1>
+
+    {{ include('feedbackp/_form.html.twig') }}
+
+    <a href="{{ path('app_feedbackp_indexFront') }}">back to list</a>
+{% endblock %}

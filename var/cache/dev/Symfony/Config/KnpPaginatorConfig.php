@@ -20,6 +20,9 @@ class KnpPaginatorConfig implements \Symfony\Component\Config\Builder\ConfigBuil
     private $convertException;
     private $_usedProperties = [];
 
+    /**
+     * @default {"sort_field_name":"sort","sort_direction_name":"direction","filter_field_name":"filterField","filter_value_name":"filterValue","page_name":"page","distinct":true,"page_out_of_range":"ignore","default_limit":10}
+    */
     public function defaultOptions(array $value = []): \Symfony\Config\KnpPaginator\DefaultOptionsConfig
     {
         if (null === $this->defaultOptions) {
@@ -32,6 +35,9 @@ class KnpPaginatorConfig implements \Symfony\Component\Config\Builder\ConfigBuil
         return $this->defaultOptions;
     }
 
+    /**
+     * @default {"pagination":"@KnpPaginator\/Pagination\/sliding.html.twig","filtration":"@KnpPaginator\/Pagination\/filtration.html.twig","sortable":"@KnpPaginator\/Pagination\/sortable_link.html.twig"}
+    */
     public function template(array $value = []): \Symfony\Config\KnpPaginator\TemplateConfig
     {
         if (null === $this->template) {
@@ -49,7 +55,7 @@ class KnpPaginatorConfig implements \Symfony\Component\Config\Builder\ConfigBuil
      * @param ParamConfigurator|mixed $value
      * @return $this
      */
-    public function pageRange($value): self
+    public function pageRange($value): static
     {
         $this->_usedProperties['pageRange'] = true;
         $this->pageRange = $value;
@@ -62,7 +68,7 @@ class KnpPaginatorConfig implements \Symfony\Component\Config\Builder\ConfigBuil
      * @param ParamConfigurator|int $value
      * @return $this
      */
-    public function pageLimit($value): self
+    public function pageLimit($value): static
     {
         $this->_usedProperties['pageLimit'] = true;
         $this->pageLimit = $value;
@@ -75,7 +81,7 @@ class KnpPaginatorConfig implements \Symfony\Component\Config\Builder\ConfigBuil
      * @param ParamConfigurator|bool $value
      * @return $this
      */
-    public function convertException($value): self
+    public function convertException($value): static
     {
         $this->_usedProperties['convertException'] = true;
         $this->convertException = $value;

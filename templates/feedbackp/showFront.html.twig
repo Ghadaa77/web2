@@ -1,0 +1,26 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Feedback{% endblock %}
+
+{% block body %}
+    <h1>Feedback</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ feedbackp.id }}</td>
+            </tr>
+            <tr>
+                <th>Favoris</th>
+                <td>{{ feedbackp.favoris ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_feedbackp_indexFront') }}">back to list</a>
+
+    <a href="{{ path('app_feedbackp_editFront', {'id': feedbackp.id}) }}">edit</a>
+
+    {{ include('feedbackp/_delete_formFront.html.twig') }}
+{% endblock %}

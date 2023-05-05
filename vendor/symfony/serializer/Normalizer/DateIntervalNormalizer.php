@@ -36,11 +36,9 @@ class DateIntervalNormalizer implements NormalizerInterface, DenormalizerInterfa
     /**
      * {@inheritdoc}
      *
-     * @return string
-     *
      * @throws InvalidArgumentException
      */
-    public function normalize($object, string $format = null, array $context = [])
+    public function normalize(mixed $object, string $format = null, array $context = []): string
     {
         if (!$object instanceof \DateInterval) {
             throw new InvalidArgumentException('The object must be an instance of "\DateInterval".');
@@ -51,8 +49,10 @@ class DateIntervalNormalizer implements NormalizerInterface, DenormalizerInterfa
 
     /**
      * {@inheritdoc}
+     *
+     * @param array $context
      */
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization(mixed $data, string $format = null /* , array $context = [] */): bool
     {
         return $data instanceof \DateInterval;
     }
@@ -68,12 +68,10 @@ class DateIntervalNormalizer implements NormalizerInterface, DenormalizerInterfa
     /**
      * {@inheritdoc}
      *
-     * @return \DateInterval
-     *
      * @throws InvalidArgumentException
      * @throws UnexpectedValueException
      */
-    public function denormalize($data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): \DateInterval
     {
         if (!\is_string($data)) {
             throw new InvalidArgumentException(sprintf('Data expected to be a string, "%s" given.', get_debug_type($data)));
@@ -121,8 +119,10 @@ class DateIntervalNormalizer implements NormalizerInterface, DenormalizerInterfa
 
     /**
      * {@inheritdoc}
+     *
+     * @param array $context
      */
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization(mixed $data, string $type, string $format = null /* , array $context = [] */): bool
     {
         return \DateInterval::class === $type;
     }

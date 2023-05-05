@@ -2,49 +2,36 @@
 
 namespace App\Entity;
 
+use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-<<<<<<< HEAD
-/**
- * Categorie
- *
- * @ORM\Table(name="categorie")
- * @ORM\Entity
- */
-class Categorie
-{
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_categorie", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idCategorie;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type_categorie", type="string", length=11, nullable=false)
-     */
-    private $typeCategorie;
-=======
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
+#[UniqueEntity(fields :['typeCategorie'], message :'Type doit être unique')]
 class Categorie
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    
-    private ?int $idCategorie = null;
 
-    #[ORM\Column(length : 11)]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $typeCategorie = null;
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
 
-    public function getIdCategorie(): ?int
+    #[ORM\OneToMany(mappedBy: 'fkIdCategorie', targetEntity: Service::class)]
+    private Collection $services;
+
+    public function __construct()
     {
-        return $this->idCategorie;
+        $this->services = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     public function getTypeCategorie(): ?string
@@ -59,5 +46,39 @@ class Categorie
         return $this;
     }
 
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
 
+    public function addService(Service $service): self
+    {
+        if (!$this->services->contains($service)) {
+            $this->services->add($service);
+            $service->setFkIdCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): self
+    {
+        if ($this->services->removeElement($service)) {
+            // set the owning side to null (unless already changed)
+            if ($service->getFkIdCategorie() === $this) {
+                $service->setFkIdCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return(string) $this->getTypeCategorie();
+
+    }
 }

@@ -1,0 +1,11 @@
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+{% for message in app.flashes('error') %}
+               <div class="p-3 my-2 rounded-1 blue light-4 text-blue text-dark-3 bd-solid bd-blue bd-light-1 bd-1">{{ message }}</div>
+
+           {% endfor %}
+    {{ form_widget(form) }}
+    <button class="btn btn-link"><i class="bi bi-check2-square"></i>{{ button_label|default('') }}</button>
+
+{{ form_end(form) }}
+
+

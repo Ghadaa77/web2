@@ -2,114 +2,64 @@
 
 namespace App\Entity;
 
+use App\Repository\FeedbackRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-<<<<<<< HEAD
-/**
- * Feedback
- *
- * @ORM\Table(name="feedback", indexes={@ORM\Index(name="fk_id_produit", columns={"fk_id_produit"}), @ORM\Index(name="fk_id_userP", columns={"fk_id_userP"})})
- * @ORM\Entity
- */
-class Feedback
-{
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_feedbackP", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idFeedbackp;
-=======
 #[ORM\Entity(repositoryClass: FeedbackRepository::class)]
 class Feedback
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    
-    private ?int $idFeedbackp = null;
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
+    private ?int $id = null;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="favorisP", type="boolean", nullable=false)
-     */
-    private $favorisp;
+    #[ORM\Column(nullable: true)]
+    private ?bool $favoris = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="fk_id_userP", type="integer", nullable=false)
-     */
-    private $fkIdUserp;
+    #[ORM\ManyToOne(inversedBy: 'feedback')]
+    private ?User $fkIdUser = null;
 
-    /**
-<<<<<<< HEAD
-     * @var int
-     *
-     * @ORM\Column(name="fk_id_produit", type="integer", nullable=false)
-=======
-     * @var \Produit
-     *
-     * @ORM\ManyToOne(targetEntity="Produit")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="fk_id_produit", referencedColumnName="id_produit")
-     * })
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
-     */
-    private $fkIdProduit;
+    #[ORM\ManyToOne(inversedBy: 'feedback')]
+    private ?Service $fkIdService = null;
 
-    public function getIdFeedbackp(): ?int
+    public function getId(): ?int
     {
-        return $this->idFeedbackp;
+        return $this->id;
     }
 
-    public function isFavorisp(): ?bool
+    public function isFavoris(): ?bool
     {
-        return $this->favorisp;
+        return $this->favoris;
     }
 
-    public function setFavorisp(bool $favorisp): self
+    public function setFavoris(?bool $favoris): self
     {
-        $this->favorisp = $favorisp;
+        $this->favoris = $favoris;
 
         return $this;
     }
 
-    public function getFkIdUserp(): ?int
+    public function getFkIdUser(): ?User
     {
-        return $this->fkIdUserp;
+        return $this->fkIdUser;
     }
 
-    public function setFkIdUserp(int $fkIdUserp): self
+    public function setFkIdUser(?User $fkIdUser): self
     {
-        $this->fkIdUserp = $fkIdUserp;
+        $this->fkIdUser = $fkIdUser;
 
         return $this;
     }
 
-<<<<<<< HEAD
-    public function getFkIdProduit(): ?int
-=======
-    public function getFkIdProduit(): ?Produit
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
+    public function getFkIdService(): ?service
     {
-        return $this->fkIdProduit;
+        return $this->fkIdService;
     }
 
-<<<<<<< HEAD
-    public function setFkIdProduit(int $fkIdProduit): self
-=======
-    public function setFkIdProduit(?Produit $fkIdProduit): self
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
+    public function setFkIdService(?service $fkIdService): self
     {
-        $this->fkIdProduit = $fkIdProduit;
+        $this->fkIdService = $fkIdService;
 
         return $this;
     }
-
-
 }

@@ -50,319 +50,74 @@
 <body>
 
 {% block header %}
-<<<<<<< HEAD
-  
-<!-- ======= Header ======= -->
-=======
- <!-- ======= Header ======= -->
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
-    <header id="header" class="d-flex align-items-center">
-      <div class="container d-flex align-items-center justify-content-between">
-  
-        <h1 class="logo"><a href="index.html">SWA<span>P</span></a></h1>
+  <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+      <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto"><a href="/home">SWA<span>P</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
+        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
   
-        <nav id="navbar" class="navbar">
+        <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
             <li><a class="nav-link scrollto active" href="#hero">Acceuil</a></li>
-            <li><a class="nav-link scrollto" href="#about">A propos</a></li>
-<<<<<<< HEAD
-           <li><a class="nav-link scrollto" href="{{ path('app_produit_front_index') }}">Produits</a></li>
-=======
-            <li><a class="nav-link scrollto" href="">Produits</a></li>
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
-
-            <li class="dropdown"><a href="#"><span>Service</span> <i class="bi bi-chevron-down"></i></a>
+            <li><a class="nav-link scrollto" href="#about">A propos </a></li>
+            <li><a class="nav-link scrollto" href="#services">Produits </a></li>
+            
+            <li class="dropdown"><a href="#"><span>Services </span> <i class="bi bi-chevron-down"></i></a>
               <ul>
-                <li><a href="#">Echange</a></li>
-                <li><a href="#">Produit</a></li>
-               
+                <li><a href="{{ path('app_categorie_indexFront') }}">Categorie</a></li>
+                <li><a href="{{ path('app_service_indexFront') }}">Service</a></li>
+                
               </ul>
             </li>
-<<<<<<< HEAD
-       <li><a class="nav-link scrollto" href="{{path('app_pointderelais_front_new')}}">Livraison</a></li>
-            <li><a class="nav-link scrollto" href="{{path('app_reclamation_front_new')}}">Réclamation</a></li>
-=======
-            <li><a class="nav-link scrollto" href="">Livraison</a></li>
-            <li><a class="nav-link scrollto" href="#services">Réclamation</a></li>
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
 
 
-            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+<li class="dropdown"><a href="#"><span>Feedback </span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a href="/feedbackFront">Services</a></li>
+                <li><a href="/feedbackpFront">Produits</a></li>
+                
+              </ul>
+            </li>
+            
           </ul>
-          <a href="#about" class="btn-get-started scrollto">compte </a>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
+          
   
+        <a href="/userFront/{{ app.user.id }}" class="nav-link scrollto">Profile</a>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+
+        <a class ="row justify-content-center " style="color: #A51111;" href="{{ path('app_logout') }}">Logout</a>
+        
+        </nav><!-- .navbar -->
       </div>
     </header><!-- End Header -->
-<<<<<<< HEAD
-=======
-
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
+  {% endblock %}
   
-    <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex align-items-center">
-      <div class="container" data-aos="zoom-out" data-aos-delay="100">
-       <h1>Bienvenue la famille SWAP</h1><br>
-    <h2>Vous trouvez tout les nouveautés chez nous .<br>Une application qui offres une large sélection<br>
-       des produits avec un livraison à domicille en <br>un temps opportun .</h2>
-    <a href="#about" class="btn-get-started scrollto">Voir plus </a>
-        </div>
-      </div>
-    </section>{% endblock %}<!-- End Hero -->
-<<<<<<< HEAD
 
-=======
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
-<!-- ======= Tabs Section ======= -->
-    <section id="tabs" class="tabs">
-      <div class="section-title">
-        <h2>A propos</h2>
-      </div>
-      <div class="container" data-aos="fade-up">
-        
-        <ul class="nav nav-tabs row d-flex">
-          <li class="nav-item col-3">
-            <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
-              <i class="bi bi-houses-fill"></i>
-              <h4 class="d-none d-lg-block">Livraison à domicille</h4>
-            </a>
-          </li>
-          <li class="nav-item col-3">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
-              <i class="bi bi-cart3"></i>
-              <h4 class="d-none d-lg-block">Large sélection produits</h4>
-            </a>
-          </li>
-          <li class="nav-item col-3">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
-              <i class="bi bi-arrow-repeat"></i>
-              <h4 class="d-none d-lg-block">Echange des produits</h4>
-            </a>
-          </li>
-          <li class="nav-item col-3">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
-              <i class="bi bi-brightness-high-fill"></i>
-              <h4 class="d-none d-lg-block">Bonne qualité produits</h4>
-            </a>
-          </li>
-        </ul>
-
-        <div class="tab-content">
-          <div class="tab-pane active show" id="tab-1">
-            <div class="row">
-              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0" data-aos="fade-up" data-aos-delay="100">
-                <h3>SWAP une application troc qui met à ces clients une large sélection des produits et des services :</h3>
-                <p class="fst-italic">
-                  En faite à travers notre application, tout utilisateur peut profiter de nos services tel que : 
-                </p>
-                <ul>
-                  <li><i class="ri-check-double-line"></i> Mettre un produit sur site pour le vendre en ajoutant tous ces informations nécessaire pour faciliter
-                  la compréhension de l'utilité du produit.</li>
-                  <li><i class="ri-check-double-line"></i> Faire un échange avec un autre produit ou bien un autre service.</li>
-                  <li><i class="ri-check-double-line"></i> Nous sommes à vos disposition pour faire tous réclamations et nous avons ravis de vous répondre à tous 
-                  vos questions.</li>
-                </ul>
-                <p>
-                 N'hésitez pas de mettre vos produits en vente et partagez avec nous des choses que vous souhaite l'échanger.Nous assurons que vos produits sont 
-                 livrer en un temps opportun.N'oubliez pas de créer un compte pour récu tous les nouveautés. 
-                </p>
-              </div>
-              <div class="col-lg-6 order-1 order-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
-              <img src="{{asset('front-office/img/im.jpg')}}" class="img-fluid" alt="">
-                
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="tab-2">
-            <div class="row">
-              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
-                <h3>SWAP une application troc qui met à ces clients une large sélection des produits et des services :</h3>
-                
-                <p class="fst-italic">
-                  En faite à travers notre application, tout utilisateur peut profiter de nos services tel que : 
-                </p>
-            <ul>
-                  <li><i class="ri-check-double-line"></i> Mettre un produit sur site pour le vendre en ajoutant tous ces informations nécessaire pour faciliter
-                  la compréhension de l'utilité du produit.</li>
-                  <li><i class="ri-check-double-line"></i> Faire un échange avec un autre produit ou bien un autre service.</li>
-                  <li><i class="ri-check-double-line"></i> Nous sommes à vos disposition pour faire tous réclamations et nous avons ravis de vous répondre à tous 
-                  vos questions.</li>
-                </ul>
-                <p>
-                 N'hésitez pas de mettre vos produits en vente et partagez avec nous des choses que vous souhaite l'échanger.Nous assurons que vos produits sont 
-                 livrer en un temps opportun.N'oubliez pas de créer un compte pour récu tous les nouveautés. 
-                </p>
-              </div>
-              <div class="col-lg-6 order-1 order-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
-              <img src="{{asset('front-office/img/im.jpg')}}" class="img-fluid" alt="">
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="tab-3">
-            <div class="row">
-              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
-                <h3>SWAP une application troc qui met à ces clients une large sélection des produits et des services :</h3>
-                <p>
-                  En faite à travers notre application, tout utilisateur peut profiter de nos services tel que : 
-                </p>
-              <ul>
-                  <li><i class="ri-check-double-line"></i> Mettre un produit sur site pour le vendre en ajoutant tous ces informations nécessaire pour faciliter
-                  la compréhension de l'utilité du produit.</li>
-                  <li><i class="ri-check-double-line"></i> Faire un échange avec un autre produit ou bien un autre service.</li>
-                  <li><i class="ri-check-double-line"></i> Nous sommes à vos disposition pour faire tous réclamations et nous avons ravis de vous répondre à tous 
-                  vos questions.</li>
-                </ul>
-                <p>
-                 N'hésitez pas de mettre vos produits en vente et partagez avec nous des choses que vous souhaite l'échanger.Nous assurons que vos produits sont 
-                 livrer en un temps opportun.N'oubliez pas de créer un compte pour récu tous les nouveautés. 
-                </p>
-              </div>
-              <div class="col-lg-6 order-1 order-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
-              <img src="{{asset('front-office/img/im.jpg')}}" class="img-fluid" alt="">
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="tab-4">
-            <div class="row">
-              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
-                <h3>SWAP une application troc qui met à ces clients une large sélection des produits et des services :</h3>
-               
-                <p class="fst-italic">
-                 En faite à travers notre application, tout utilisateur peut profiter de nos services tel que : 
-                </p>
-              <ul>
-                  <li><i class="ri-check-double-line"></i> Mettre un produit sur site pour le vendre en ajoutant tous ces informations nécessaire pour faciliter
-                  la compréhension de l'utilité du produit.</li>
-                  <li><i class="ri-check-double-line"></i> Faire un échange avec un autre produit ou bien un autre service.</li>
-                  <li><i class="ri-check-double-line"></i> Nous sommes à vos disposition pour faire tous réclamations et nous avons ravis de vous répondre à tous 
-                  vos questions.</li>
-                </ul>
-                <p>
-                 N'hésitez pas de mettre vos produits en vente et partagez avec nous des choses que vous souhaite l'échanger.Nous assurons que vos produits sont 
-                 livrer en un temps opportun.N'oubliez pas de créer un compte pour récu tous les nouveautés. 
-                </p>
-              </div>
-              <div class="col-lg-6 order-1 order-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
-              <img src="{{asset('front-office/img/im.jpg')}}" class="img-fluid" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Tabs Section -->
-<<<<<<< HEAD
-=======
-
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
+    <!-- ======= main Section ======= -->
+    
   <main id="main">
 
-    
-
-<<<<<<< HEAD
-    
-=======
-   
-  
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
-
-
-    
-
-<<<<<<< HEAD
-   
-   
-    <section id="team" class="team section-bg">
-=======
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
+    <!-- ======= profile Section ======= -->
+    <section id="" class="profile section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Pointderelais</h2>
-          <p> </p>
+        <br>
+          <h2></h2>
+          
           {% block body %}
           {% endblock %}
         </div>
-
-        <div class="row">
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            
-             
-          </div>
-
-          
-
-          
-
-         
-
-      </div>
-    </section><!-- End Services Section -->
-
-
-      <section id="team" class="team section-bg">
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
-  <div class="container" data-aos="fade-up">
-
-    <div class="section-title">
-      <h2>Livraison</h2>
-      <p>Choisissez votre option de livraison :</p>
-    </div>
-
-    <div class="row">
-
-      <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
-        <div class="member d-flex align-items-start">
-          <div class="member-info">
-            <h4>Point de relais </h4>
-            <span>24 heures</span>
-            <p>Retirez votre commande dans l'un de nos points de relais.</p>
-<<<<<<< HEAD
-          <a href="{{path('app_pointderelais_front_new')}}" class="btn-get-started btn-outline">Choisir cette option</a>
-=======
-           <a href="#" class="btn-get-started btn-outline">Choisir cette option</a>
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
-
-          </div>
         </div>
-      </div>
-
-      <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="200">
-        <div class="member d-flex align-items-start">
-          <div class="member-info">
-            <h4>Livraison standard</h4>
-            <span>3-5 jours ouvrables</span>
-            <p>Recevez votre commande en 3 à 5 jours ouvrables.</p>
-          <a href="#" class="btn-get-started btn-outline">Choisir cette option</a>
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-    
-
-<<<<<<< HEAD
-
-
-=======
-    
+    </section><!-- End profile Section -->
 
 
   </main><!-- End #main -->
 
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
 {% block footer %}
   <!-- ======= Footer ======= -->
   <footer id="footer">
-
 
 
     <div class="footer-top">
@@ -394,11 +149,7 @@
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Consulter</h4>
             <ul>
-<<<<<<< HEAD
-              <li><i class="bx bx-chevron-right"></i> <a href="{{path('app_produit_index')}}">Produits </a></li>
-=======
               <li><i class="bx bx-chevron-right"></i> <a href="#">Produits</a></li>
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
               <li><i class="bx bx-chevron-right"></i> <a href="#">Réclamation</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Livraison</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Compte</a></li>

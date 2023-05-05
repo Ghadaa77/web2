@@ -1,0 +1,42 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block body %}
+    <h1>Categories:</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.id }}</td>
+                <td>{{ categorie.typeCategorie }}</td>
+                <td>
+                   <form action="{{ path('app_categorie_showFront', {'id': categorie.id}) }}" method="get" style="display: inline;">
+                     <button type="submit" class="btn btn-link" style="padding: 0;"><i class="bi bi-eye"></i></button>
+                   </form>
+                    <form action="{{ path('app_categorie_editFront', {'id': categorie.id}) }}" method="get" style="display: inline;">
+                     <button type="submit" class="btn btn-link" style="padding: 0;"><i class="bi bi-pencil-square"></i></button>
+                   </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+                   <i class="mdi mdi-playlist-play"><a href="{{ path('order_By_Type')}}">Trier par Type</a></i> 
+    </ul>
+
+
+    <a href="{{ path('app_categorie_newFront') }}"><class="btn btn-link"><i class="bi bi-plus-square"></i></a>
+{% endblock %}

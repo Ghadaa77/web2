@@ -1,0 +1,12 @@
+{% extends 'baseFront.html.twig' %}
+{% block title %}Service edit{% endblock %}
+
+{% block body %}
+    <h1>Edit Service</h1>
+
+    {{ include('service/_form.html.twig', {'button_label': ''}) }}
+
+
+    {{ include('service/_delete_formFront.html.twig') }}
+    <a href="{{ path('app_service_indexFront') }}">back to list</a>
+{% endblock %}

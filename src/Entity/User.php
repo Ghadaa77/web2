@@ -2,129 +2,131 @@
 
 namespace App\Entity;
 
-<<<<<<< HEAD
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
-use Doctrine\DBAL\Types\Types;
-/**
- * User
- *
- * @ORM\Table(name="user")
- * @ORM\Entity
- */
-class User
-{
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
-     */
-    private $nom;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
-     */
-    private $prenom;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="role", type="string", length=255, nullable=false)
-     */
-    private $role;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
-     */
-    private $adresse;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
-     */
-    private $password;
-=======
-use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
-#[ORM\GeneratedValue]
-#[ORM\Column]
-
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
     private ?int $id = null;
 
-   
-     #[ORM\Column( length:255)]
-     
-    private ?string $nom = null;
-
-    
-      #[ORM\Column(length:255)]
-     
-    private ?string $prenom = null;
-
-    
-     #[ORM\Column(length:255)]
-     
-    private ?string $role = null;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_naissance", type="date", nullable=false)
-     */
-    private $dateNaissance;
-
-  
-     #[ORM\Column(length:255)]
-     
-    private ?string $adresse = null;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="num_tel", type="integer", nullable=false)
-     */
-    private $numTel;
-
-     #[ORM\Column( length:255)]
-   
+    #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
-   
-     #[ORM\Column(length:255)]
-     
+    #[ORM\Column]
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
     private ?string $password = null;
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
+
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $prenom = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $adresse = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $dateNaissance = null;
+
+    #[ORM\Column]
+    private ?int $numTel = null;
+
+    #[ORM\OneToMany(mappedBy: 'fkIdUser', targetEntity: Feedback::class)]
+    private Collection $feedback;
+
+    #[ORM\OneToMany(mappedBy: 'fkIdUser', targetEntity: Feedbackp::class)]
+    private Collection $feedbackps;
+
+    public function __construct()
+    {
+        $this->feedback = new ArrayCollection();
+        $this->feedbackps = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] =Null;
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getNom(): ?string
@@ -151,33 +153,6 @@ class User
         return $this;
     }
 
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
-<<<<<<< HEAD
-=======
-    public function getDateNaissance(): ?\DateTimeInterface
-    {
-        return $this->dateNaissance;
-    }
-
-    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
-    {
-        $this->dateNaissance = $dateNaissance;
-
-        return $this;
-    }
-
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
     public function getAdresse(): ?string
     {
         return $this->adresse;
@@ -190,8 +165,18 @@ class User
         return $this;
     }
 
-<<<<<<< HEAD
-=======
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->dateNaissance;
+    }
+
+    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
+    {
+        $this->dateNaissance = $dateNaissance;
+
+        return $this;
+    }
+
     public function getNumTel(): ?int
     {
         return $this->numTel;
@@ -204,30 +189,70 @@ class User
         return $this;
     }
 
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
-    public function getEmail(): ?string
+    /**
+     * @return Collection<int, Feedback>
+     */
+    public function getFeedback(): Collection
     {
-        return $this->email;
+        return $this->feedback;
     }
 
-    public function setEmail(string $email): self
+    public function addFeedback(Feedback $feedback): self
     {
-        $this->email = $email;
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback->add($feedback);
+            $feedback->setFkIdUser($this);
+        }
 
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function removeFeedback(Feedback $feedback): self
     {
-        return $this->password;
+        if ($this->feedback->removeElement($feedback)) {
+            // set the owning side to null (unless already changed)
+            if ($feedback->getFkIdUser() === $this) {
+                $feedback->setFkIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        
+        $res=$this->getNom(). " ".  $this->getPrenom();
+        return(string) $res;
     }
 
-    public function setPassword(string $password): self
+    /**
+     * @return Collection<int, Feedbackp>
+     */
+    public function getFeedbackps(): Collection
     {
-        $this->password = $password;
+        return $this->feedbackps;
+    }
+
+    public function addFeedbackp(Feedbackp $feedbackp): self
+    {
+        if (!$this->feedbackps->contains($feedbackp)) {
+            $this->feedbackps->add($feedbackp);
+            $feedbackp->setFkIdUser($this);
+        }
 
         return $this;
     }
 
+    public function removeFeedbackp(Feedbackp $feedbackp): self
+    {
+        if ($this->feedbackps->removeElement($feedbackp)) {
+            // set the owning side to null (unless already changed)
+            if ($feedbackp->getFkIdUser() === $this) {
+                $feedbackp->setFkIdUser(null);
+            }
+        }
+
+        return $this;
+    }
 
 }

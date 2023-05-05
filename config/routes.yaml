@@ -1,8 +1,8 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-<<<<<<< HEAD
-=======
+controllers:
+    resource: ../src/Controller/
+    type: attribute
 
-
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
+    
+app_statistics:
+    path: /statistics
+    controller: App\Controller\StatisticsController::index

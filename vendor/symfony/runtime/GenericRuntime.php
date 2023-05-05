@@ -65,7 +65,7 @@ class GenericRuntime implements RuntimeInterface
         $debug = $options['debug'] ?? $_SERVER[$debugKey] ?? $_ENV[$debugKey] ?? true;
 
         if (!\is_bool($debug)) {
-            $debug = filter_var($debug, \FILTER_VALIDATE_BOOL);
+            $debug = filter_var($debug, \FILTER_VALIDATE_BOOLEAN);
         }
 
         if ($debug) {
@@ -83,6 +83,9 @@ class GenericRuntime implements RuntimeInterface
         $this->options = $options;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getResolver(callable $callable, \ReflectionFunction $reflector = null): ResolverInterface
     {
         $callable = $callable(...);
@@ -111,16 +114,21 @@ class GenericRuntime implements RuntimeInterface
         return new ClosureResolver($callable, $arguments);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRunner(?object $application): RunnerInterface
     {
-        $application ??= static function () { return 0; };
+        if (null === $application) {
+            $application = static function () { return 0; };
+        }
 
         if ($application instanceof RunnerInterface) {
             return $application;
         }
 
         if (!$application instanceof \Closure) {
-            if ($runtime = $this->resolveRuntime($application::class)) {
+            if ($runtime = $this->resolveRuntime(\get_class($application))) {
                 return $runtime->getRunner($application);
             }
 

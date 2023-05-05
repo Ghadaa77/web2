@@ -67,10 +67,10 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'role', '' . "\0" . 'App\\Entity\\User' . "\0" . 'dateNaissance', '' . "\0" . 'App\\Entity\\User' . "\0" . 'adresse', '' . "\0" . 'App\\Entity\\User' . "\0" . 'numTel', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roles', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'adresse', '' . "\0" . 'App\\Entity\\User' . "\0" . 'dateNaissance', '' . "\0" . 'App\\Entity\\User' . "\0" . 'numTel', '' . "\0" . 'App\\Entity\\User' . "\0" . 'feedback', '' . "\0" . 'App\\Entity\\User' . "\0" . 'feedbackps'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'role', '' . "\0" . 'App\\Entity\\User' . "\0" . 'dateNaissance', '' . "\0" . 'App\\Entity\\User' . "\0" . 'adresse', '' . "\0" . 'App\\Entity\\User' . "\0" . 'numTel', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'roles', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\User' . "\0" . 'adresse', '' . "\0" . 'App\\Entity\\User' . "\0" . 'dateNaissance', '' . "\0" . 'App\\Entity\\User' . "\0" . 'numTel', '' . "\0" . 'App\\Entity\\User' . "\0" . 'feedback', '' . "\0" . 'App\\Entity\\User' . "\0" . 'feedbackps'];
     }
 
     /**
@@ -195,6 +195,94 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getEmail(): ?string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEmail', []);
+
+        return parent::getEmail();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEmail(string $email): \App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEmail', [$email]);
+
+        return parent::setEmail($email);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUserIdentifier(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUserIdentifier', []);
+
+        return parent::getUserIdentifier();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRoles(): array
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRoles', []);
+
+        return parent::getRoles();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setRoles(array $roles): \App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRoles', [$roles]);
+
+        return parent::setRoles($roles);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPassword(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPassword', []);
+
+        return parent::getPassword();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPassword(string $password): \App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPassword', [$password]);
+
+        return parent::setPassword($password);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function eraseCredentials()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'eraseCredentials', []);
+
+        return parent::eraseCredentials();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getNom(): ?string
     {
 
@@ -239,23 +327,23 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getRole(): ?string
+    public function getAdresse(): ?string
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRole', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAdresse', []);
 
-        return parent::getRole();
+        return parent::getAdresse();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setRole(string $role): \App\Entity\User
+    public function setAdresse(string $adresse): \App\Entity\User
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRole', [$role]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAdresse', [$adresse]);
 
-        return parent::setRole($role);
+        return parent::setAdresse($adresse);
     }
 
     /**
@@ -283,28 +371,6 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getAdresse(): ?string
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAdresse', []);
-
-        return parent::getAdresse();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setAdresse(string $adresse): \App\Entity\User
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAdresse', [$adresse]);
-
-        return parent::setAdresse($adresse);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getNumTel(): ?int
     {
 
@@ -327,45 +393,78 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getEmail(): ?string
+    public function getFeedback(): \Doctrine\Common\Collections\Collection
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEmail', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFeedback', []);
 
-        return parent::getEmail();
+        return parent::getFeedback();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setEmail(string $email): \App\Entity\User
+    public function addFeedback(\App\Entity\Feedback $feedback): \App\Entity\User
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEmail', [$email]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addFeedback', [$feedback]);
 
-        return parent::setEmail($email);
+        return parent::addFeedback($feedback);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getPassword(): ?string
+    public function removeFeedback(\App\Entity\Feedback $feedback): \App\Entity\User
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPassword', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeFeedback', [$feedback]);
 
-        return parent::getPassword();
+        return parent::removeFeedback($feedback);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setPassword(string $password): \App\Entity\User
+    public function __toString(): string
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPassword', [$password]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, '__toString', []);
 
-        return parent::setPassword($password);
+        return parent::__toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFeedbackps(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFeedbackps', []);
+
+        return parent::getFeedbackps();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addFeedbackp(\App\Entity\Feedbackp $feedbackp): \App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addFeedbackp', [$feedbackp]);
+
+        return parent::addFeedbackp($feedbackp);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeFeedbackp(\App\Entity\Feedbackp $feedbackp): \App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeFeedbackp', [$feedbackp]);
+
+        return parent::removeFeedbackp($feedbackp);
     }
 
 }

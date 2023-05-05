@@ -25,7 +25,7 @@ class DefaultOptionsConfig
      * @param ParamConfigurator|mixed $value
      * @return $this
      */
-    public function sortFieldName($value): self
+    public function sortFieldName($value): static
     {
         $this->_usedProperties['sortFieldName'] = true;
         $this->sortFieldName = $value;
@@ -38,7 +38,7 @@ class DefaultOptionsConfig
      * @param ParamConfigurator|mixed $value
      * @return $this
      */
-    public function sortDirectionName($value): self
+    public function sortDirectionName($value): static
     {
         $this->_usedProperties['sortDirectionName'] = true;
         $this->sortDirectionName = $value;
@@ -51,7 +51,7 @@ class DefaultOptionsConfig
      * @param ParamConfigurator|mixed $value
      * @return $this
      */
-    public function filterFieldName($value): self
+    public function filterFieldName($value): static
     {
         $this->_usedProperties['filterFieldName'] = true;
         $this->filterFieldName = $value;
@@ -64,7 +64,7 @@ class DefaultOptionsConfig
      * @param ParamConfigurator|mixed $value
      * @return $this
      */
-    public function filterValueName($value): self
+    public function filterValueName($value): static
     {
         $this->_usedProperties['filterValueName'] = true;
         $this->filterValueName = $value;
@@ -77,7 +77,7 @@ class DefaultOptionsConfig
      * @param ParamConfigurator|mixed $value
      * @return $this
      */
-    public function pageName($value): self
+    public function pageName($value): static
     {
         $this->_usedProperties['pageName'] = true;
         $this->pageName = $value;
@@ -90,7 +90,7 @@ class DefaultOptionsConfig
      * @param ParamConfigurator|bool $value
      * @return $this
      */
-    public function distinct($value): self
+    public function distinct($value): static
     {
         $this->_usedProperties['distinct'] = true;
         $this->distinct = $value;
@@ -103,7 +103,7 @@ class DefaultOptionsConfig
      * @param ParamConfigurator|mixed $value
      * @return $this
      */
-    public function pageOutOfRange($value): self
+    public function pageOutOfRange($value): static
     {
         $this->_usedProperties['pageOutOfRange'] = true;
         $this->pageOutOfRange = $value;
@@ -116,7 +116,7 @@ class DefaultOptionsConfig
      * @param ParamConfigurator|mixed $value
      * @return $this
      */
-    public function defaultLimit($value): self
+    public function defaultLimit($value): static
     {
         $this->_usedProperties['defaultLimit'] = true;
         $this->defaultLimit = $value;

@@ -24,6 +24,9 @@ class SensioFrameworkExtraConfig implements \Symfony\Component\Config\Builder\Co
     private $templating;
     private $_usedProperties = [];
 
+    /**
+     * @default {"annotations":true}
+    */
     public function router(array $value = []): \Symfony\Config\SensioFrameworkExtra\RouterConfig
     {
         if (null === $this->router) {
@@ -36,6 +39,9 @@ class SensioFrameworkExtraConfig implements \Symfony\Component\Config\Builder\Co
         return $this->router;
     }
 
+    /**
+     * @default {"converters":true,"auto_convert":true,"disable":[]}
+    */
     public function request(array $value = []): \Symfony\Config\SensioFrameworkExtra\RequestConfig
     {
         if (null === $this->request) {
@@ -48,6 +54,9 @@ class SensioFrameworkExtraConfig implements \Symfony\Component\Config\Builder\Co
         return $this->request;
     }
 
+    /**
+     * @default {"annotations":true}
+    */
     public function view(array $value = []): \Symfony\Config\SensioFrameworkExtra\ViewConfig
     {
         if (null === $this->view) {
@@ -60,6 +69,9 @@ class SensioFrameworkExtraConfig implements \Symfony\Component\Config\Builder\Co
         return $this->view;
     }
 
+    /**
+     * @default {"annotations":true}
+    */
     public function cache(array $value = []): \Symfony\Config\SensioFrameworkExtra\CacheConfig
     {
         if (null === $this->cache) {
@@ -72,6 +84,9 @@ class SensioFrameworkExtraConfig implements \Symfony\Component\Config\Builder\Co
         return $this->cache;
     }
 
+    /**
+     * @default {"annotations":true,"expression_language":"sensio_framework_extra.security.expression_language.default"}
+    */
     public function security(array $value = []): \Symfony\Config\SensioFrameworkExtra\SecurityConfig
     {
         if (null === $this->security) {

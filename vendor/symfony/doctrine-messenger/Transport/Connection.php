@@ -33,7 +33,7 @@ use Symfony\Component\Messenger\Exception\TransportException;
 use Symfony\Contracts\Service\ResetInterface;
 
 /**
- * @internal since Symfony 5.1
+ * @internal
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  * @author Kévin Dunglas <dunglas@gmail.com>
@@ -63,8 +63,8 @@ class Connection implements ResetInterface
     protected $configuration = [];
     protected $driverConnection;
     protected $queueEmptiedAt;
-    private $schemaSynchronizer;
-    private $autoSetup;
+    private ?SchemaSynchronizer $schemaSynchronizer;
+    private bool $autoSetup;
 
     public function __construct(array $configuration, DBALConnection $driverConnection, SchemaSynchronizer $schemaSynchronizer = null)
     {
@@ -310,7 +310,7 @@ class Connection implements ResetInterface
         }, $data);
     }
 
-    public function find($id): ?array
+    public function find(mixed $id): ?array
     {
         $queryBuilder = $this->createQueryBuilder()
             ->where('m.id = ? and m.queue_name = ?');
@@ -501,8 +501,4 @@ class Connection implements ResetInterface
             ? $comparator->compareSchemas($from, $to)
             : $comparator->compare($from, $to);
     }
-}
-
-if (!class_exists(\Symfony\Component\Messenger\Transport\Doctrine\Connection::class, false)) {
-    class_alias(Connection::class, \Symfony\Component\Messenger\Transport\Doctrine\Connection::class);
 }

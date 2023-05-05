@@ -11,8 +11,6 @@
 
 namespace Symfony\Component\Serializer\Normalizer;
 
-use Symfony\Component\Serializer\Annotation\Ignore;
-
 /**
  * Converts between objects with getter and setter methods and arrays.
  *
@@ -40,16 +38,20 @@ class GetSetMethodNormalizer extends AbstractObjectNormalizer
 
     /**
      * {@inheritdoc}
+     *
+     * @param array $context
      */
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization(mixed $data, string $format = null /* , array $context = [] */): bool
     {
         return parent::supportsNormalization($data, $format) && $this->supports(\get_class($data));
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @param array $context
      */
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization(mixed $data, string $type, string $format = null /* , array $context = [] */): bool
     {
         return parent::supportsDenormalization($data, $type, $format) && $this->supports($type);
     }
@@ -83,18 +85,23 @@ class GetSetMethodNormalizer extends AbstractObjectNormalizer
      */
     private function isGetMethod(\ReflectionMethod $method): bool
     {
-        return !$method->isStatic()
-            && (\PHP_VERSION_ID < 80000 || !$method->getAttributes(Ignore::class))
-            && !$method->getNumberOfRequiredParameters()
-            && ((2 < ($methodLength = \strlen($method->name)) && str_starts_with($method->name, 'is'))
-                || (3 < $methodLength && (str_starts_with($method->name, 'has') || str_starts_with($method->name, 'get')))
-            );
+        $methodLength = \strlen($method->name);
+
+        return
+            !$method->isStatic() &&
+            (
+                ((str_starts_with($method->name, 'get') && 3 < $methodLength) ||
+                (str_starts_with($method->name, 'is') && 2 < $methodLength) ||
+                (str_starts_with($method->name, 'has') && 3 < $methodLength)) &&
+                0 === $method->getNumberOfRequiredParameters()
+            )
+        ;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function extractAttributes(object $object, string $format = null, array $context = [])
+    protected function extractAttributes(object $object, string $format = null, array $context = []): array
     {
         $reflectionObject = new \ReflectionObject($object);
         $reflectionMethods = $reflectionObject->getMethods(\ReflectionMethod::IS_PUBLIC);
@@ -118,22 +125,22 @@ class GetSetMethodNormalizer extends AbstractObjectNormalizer
     /**
      * {@inheritdoc}
      */
-    protected function getAttributeValue(object $object, string $attribute, string $format = null, array $context = [])
+    protected function getAttributeValue(object $object, string $attribute, string $format = null, array $context = []): mixed
     {
         $ucfirsted = ucfirst($attribute);
 
         $getter = 'get'.$ucfirsted;
-        if (method_exists($object, $getter) && \is_callable([$object, $getter])) {
+        if (\is_callable([$object, $getter])) {
             return $object->$getter();
         }
 
         $isser = 'is'.$ucfirsted;
-        if (method_exists($object, $isser) && \is_callable([$object, $isser])) {
+        if (\is_callable([$object, $isser])) {
             return $object->$isser();
         }
 
         $haser = 'has'.$ucfirsted;
-        if (method_exists($object, $haser) && \is_callable([$object, $haser])) {
+        if (\is_callable([$object, $haser])) {
             return $object->$haser();
         }
 
@@ -143,13 +150,13 @@ class GetSetMethodNormalizer extends AbstractObjectNormalizer
     /**
      * {@inheritdoc}
      */
-    protected function setAttributeValue(object $object, string $attribute, $value, string $format = null, array $context = [])
+    protected function setAttributeValue(object $object, string $attribute, mixed $value, string $format = null, array $context = [])
     {
         $setter = 'set'.ucfirst($attribute);
         $key = \get_class($object).':'.$setter;
 
         if (!isset(self::$setterAccessibleCache[$key])) {
-            self::$setterAccessibleCache[$key] = method_exists($object, $setter) && \is_callable([$object, $setter]) && !(new \ReflectionMethod($object, $setter))->isStatic();
+            self::$setterAccessibleCache[$key] = \is_callable([$object, $setter]) && !(new \ReflectionMethod($object, $setter))->isStatic();
         }
 
         if (self::$setterAccessibleCache[$key]) {

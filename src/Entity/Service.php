@@ -2,99 +2,51 @@
 
 namespace App\Entity;
 
-<<<<<<< HEAD
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * Service
- *
- * @ORM\Table(name="service")
- * @ORM\Entity
- */
-class Service
-{
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_service", type="string", length=255, nullable=false)
-     */
-    private $descriptionService;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type_paiement_service", type="string", length=255, nullable=false)
-     */
-    private $typePaiementService;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-=======
+use App\Repository\ServiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
 class Service
 {
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    
-        private ?int $id = null;
-    
-    
-    private $idService;
+    private ?int $id = null;
 
-   
-      #[ORM\Column( length:255)]
-     
-    private ?string $descriptionService = null;
+    #[ORM\Column(length: 255)]
+    #[NotBlank(message: 'Description doit être non vide')]
+    private ?string $descriptionService =null;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_service", type="date", nullable=false)
-     */
-    private $dateService;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $dateService = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="prix_service", type="integer", nullable=false)
-     */
-    private $prixService;
+    #[ORM\Column]
+    private ?float $prixService = null;
 
-   
-      #[ORM\Column( length:255)]
-     
+    #[ORM\Column(length: 255)]
     private ?string $typePaiementService = null;
 
-    /**
-     * @var \Categorie
-     *
-     * @ORM\ManyToOne(targetEntity="Categorie")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="fk_id_categorie", referencedColumnName="id_categorie")
-     * })
-     */
-    private $fkIdCategorie;
+    #[ORM\ManyToOne(inversedBy: 'services')]
+    private ?Categorie $fkIdCategorie = null;
 
-    public function getIdService(): ?int
+    #[ORM\OneToMany(mappedBy: 'fkIdService', targetEntity: Feedback::class)]
+    private Collection $feedback;
+
+    public function __construct()
     {
-        return $this->idService;
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
+        $this->feedback = new ArrayCollection();
     }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+
 
     public function getDescriptionService(): ?string
     {
@@ -108,8 +60,6 @@ class Service
         return $this;
     }
 
-<<<<<<< HEAD
-=======
     public function getDateService(): ?\DateTimeInterface
     {
         return $this->dateService;
@@ -122,19 +72,18 @@ class Service
         return $this;
     }
 
-    public function getPrixService(): ?int
+    public function getPrixService(): ?float
     {
         return $this->prixService;
     }
 
-    public function setPrixService(int $prixService): self
+    public function setPrixService(float $prixService): self
     {
         $this->prixService = $prixService;
 
         return $this;
     }
 
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
     public function getTypePaiementService(): ?string
     {
         return $this->typePaiementService;
@@ -147,25 +96,52 @@ class Service
         return $this;
     }
 
-<<<<<<< HEAD
-=======
-    public function getFkIdCategorie(): ?Categorie
+    public function getFkIdCategorie(): ?categorie
     {
         return $this->fkIdCategorie;
     }
 
-    public function setFkIdCategorie(?Categorie $fkIdCategorie): self
+    public function setFkIdCategorie(?categorie $fkIdCategorie): self
     {
         $this->fkIdCategorie = $fkIdCategorie;
 
         return $this;
     }
 
-    public function getId(): ?int
+    /**
+     * @return Collection<int, Feedback>
+     */
+    public function getFeedback(): Collection
     {
-        return $this->id;
+        return $this->feedback;
     }
 
->>>>>>> 8e2d5ae6251d16e7cfd86071e560d1d445a48627
+    public function addFeedback(Feedback $feedback): self
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback->add($feedback);
+            $feedback->setFkIdService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): self
+    {
+        if ($this->feedback->removeElement($feedback)) {
+            // set the owning side to null (unless already changed)
+            if ($feedback->getFkIdService() === $this) {
+                $feedback->setFkIdService(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return(string) $this->getDescriptionService();
+
+    }
 
 }

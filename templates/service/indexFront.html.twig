@@ -1,0 +1,68 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Service index{% endblock %}
+
+{% block body %}
+    <h1>Services:</h1>
+
+
+    
+    {# <form method="get">
+        <label for="categorie">Category:</label>
+        <select id="categorie" name="categorie">
+            <option value="">All</option>
+            {% for categorie in categories %}
+                <option value="{{ categorie.idCategorie }}" {% if categorie.idCategorie == app.request.get('categorie') %}selected{% endif %}>{{ categorie.typeCategorie }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filter</button>
+    </form> #}
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Prix</th>
+                <th>TypePaiement</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for service in services %}
+            {% if app.request.get('Categorie') is empty or service.categorie.id == app.request.get('Categorie') %}
+                <tr>
+                    <td>{{ service.id }}</td>
+                    <td>{{ service.descriptionService }}</td>
+                    <td>{{ service.dateService ? service.dateService|date('Y-m-d') : '' }}</td>
+                    <td>{{ service.prixService }}</td>
+                    <td>{{ service.typePaiementService }}</td>
+                    <td>
+                         <form action="{{ path('app_service_showFront', {'id': service.id}) }}" method="get" style="display: inline;">
+                            <button type="submit" class="btn btn-link" style="padding: 0;"><i class="bi bi-eye"></i></button>
+                        </form>
+                        <form action="{{ path('app_service_editFront', {'id': service.id}) }}" method="get" style="display: inline;">
+                            <button type="submit" class="btn btn-link" style="padding: 0;"><i class="bi bi-pencil-square"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <div class="d-flex justify-content-center mt-3">
+        {{ knp_pagination_render(services) }}
+    </div>
+
+    <a href="{{ path('app_service_newFront') }}" class="btn btn-link"><i class="bi bi-plus-square"></i></a>
+    <a href="{{ path('app_pdf') }}" class="btn btn-link"><i class="bi bi-file-pdf"></i></a>
+{% endblock %}

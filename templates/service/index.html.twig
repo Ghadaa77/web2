@@ -1,20 +1,68 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
-{% block title %}Hello ServiceController!{% endblock %}
+{% block title %}Service index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Services:</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/bochr/EspritClub2/src/Controller/ServiceController.php'|file_link(0) }}">src/Controller/ServiceController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/bochr/EspritClub2/templates/service/index.html.twig'|file_link(0) }}">templates/service/index.html.twig</a></code></li>
-    </ul>
-</div>
+    
+    {# <form method="get">
+        <label for="categorie">Category:</label>
+        <select id="categorie" name="categorie">
+            <option value="">All</option>
+            {% for categorie in categories %}
+                <option value="{{ categorie.idCategorie }}" {% if categorie.idCategorie == app.request.get('categorie') %}selected{% endif %}>{{ categorie.typeCategorie }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filter</button>
+    </form> #}
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Prix</th>
+                <th>TypePaiement</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for service in services %}
+            {% if app.request.get('Categorie') is empty or service.categorie.id == app.request.get('Categorie') %}
+                <tr>
+                    <td>{{ service.id }}</td>
+                    <td>{{ service.descriptionService }}</td>
+                    <td>{{ service.dateService ? service.dateService|date('Y-m-d') : '' }}</td>
+                    <td>{{ service.prixService }}</td>
+                    <td>{{ service.typePaiementService }}</td>
+                    <td>
+                         <form action="{{ path('app_service_show', {'id': service.id}) }}" method="get" style="display: inline;">
+                            <button type="submit" class="btn btn-link" style="padding: 0;"><i class="bi bi-eye"></i></button>
+                        </form>
+                        <form action="{{ path('app_service_edit', {'id': service.id}) }}" method="get" style="display: inline;">
+                            <button type="submit" class="btn btn-link" style="padding: 0;"><i class="bi bi-pencil-square"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <div class="d-flex justify-content-center mt-3">
+        {{ knp_pagination_render(services) }}
+    </div>
+
+    <a href="{{ path('app_service_new') }}" class="btn btn-link"><i class="bi bi-plus-square"></i></a>
+    <a href="{{ path('app_pdf') }}" class="btn btn-link"><i class="bi bi-file-pdf"></i></a>
 {% endblock %}

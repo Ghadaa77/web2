@@ -20,7 +20,7 @@ class TemplateConfig
      * @param ParamConfigurator|mixed $value
      * @return $this
      */
-    public function pagination($value): self
+    public function pagination($value): static
     {
         $this->_usedProperties['pagination'] = true;
         $this->pagination = $value;
@@ -33,7 +33,7 @@ class TemplateConfig
      * @param ParamConfigurator|mixed $value
      * @return $this
      */
-    public function filtration($value): self
+    public function filtration($value): static
     {
         $this->_usedProperties['filtration'] = true;
         $this->filtration = $value;
@@ -46,7 +46,7 @@ class TemplateConfig
      * @param ParamConfigurator|mixed $value
      * @return $this
      */
-    public function sortable($value): self
+    public function sortable($value): static
     {
         $this->_usedProperties['sortable'] = true;
         $this->sortable = $value;

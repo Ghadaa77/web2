@@ -1,6 +1,20 @@
 CHANGELOG
 =========
 
+6.1
+---
+
+ * Add `SerializedMessageStamp` to avoid serializing a message when a retry occurs
+ * Automatically resolve handled message type when method different from `__invoke` is used as handler
+ * Allow `#[AsMessageHandler]` attribute on methods
+
+6.0
+---
+
+ * Remove deprecated classes `Symfony/Component/Messenger/Transport/AmqpExt`, `Symfony/Component/Messenger/Transport/Doctrine` and `Symfony/Component/Messenger/Transport/Redis`.
+ * Class `MessengerPass` cannot be configured with constructor arguments
+ * Remove constructor arguments and getters for `RedeliveryStamp`'s properties `exceptionMessage` and `flattenException`
+
 5.4
 ---
 
